@@ -1,0 +1,12 @@
+.section-title_size_medium {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+@media screen and (max-width: 965px) {
+  .section-title_size_medium {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

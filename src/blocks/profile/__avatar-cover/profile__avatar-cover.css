@@ -1,0 +1,13 @@
+.profile__avatar-cover {
+  position: relative;
+  bottom: 50px;
+  right: 75px;
+  opacity: 0;
+  height: 20px;
+  width: 20px;
+}
+
+.profile__avatar-section:hover .profile__avatar-cover {
+  opacity: 100%;
+}
+

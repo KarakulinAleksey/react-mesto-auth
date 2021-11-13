@@ -1,0 +1,16 @@
+.elements__image-likee {
+  background-image: url(../../../images/heart.svg);
+  width: 22px;
+  height: 19px;
+  cursor: pointer;
+  background-position: center;
+  border-style: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+.elements__image-likee:hover {
+  opacity: 0.5;
+}
+
+

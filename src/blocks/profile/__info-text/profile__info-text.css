@@ -1,0 +1,9 @@
+.profile__info-text{
+  padding-left: 0;
+}
+
+@media screen and (max-width: 965px) {
+  .profile__info-text{
+    padding-left: 14px;
+  }
+}

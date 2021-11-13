@@ -1,0 +1,13 @@
+.content {
+  flex-shrink: 0;
+  display: grid;
+  grid-row-gap: 51px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media screen and (max-width: 965px) {
+  .content {
+    grid-row-gap: 38.25px;
+  }
+}

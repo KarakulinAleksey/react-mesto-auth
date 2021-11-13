@@ -1,0 +1,14 @@
+.popup__figure{
+  margin: 0;
+  height: 562px;
+  max-width: 816px;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 965px) {
+  .popup__figure {
+    max-width: 240px;
+    height: 324px;
+
+  }
+}

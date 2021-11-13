@@ -1,0 +1,10 @@
+.popup__form-button-save_type_unable{
+  background-color: #fff;
+  color: #000;
+  opacity: 0.2;
+  cursor: unset;
+  border: 1px solid #000;
+}
+.popup__form-button-save_type_unable:hover {
+  opacity: 0.2;
+}
