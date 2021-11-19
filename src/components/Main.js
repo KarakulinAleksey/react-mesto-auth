@@ -10,42 +10,32 @@ function Main({ onEditProfile, onEditAvatar, onAddPlace, onCardClick }) {
   const [userDescription, setUserDescription] = React.useState("");
   const [userAvatar, setUserAvatar] = React.useState("");
   const [cards, setCards] = React.useState([]);
-  // console.log('2121');
 
   const getUserInfoData = api.getUserInfo();
+  const getAllCards = api.getAllCards();
+
   React.useEffect(() => {
     getUserInfoData
       .then((data) => {
         setUserName(data.name);
         setUserDescription(data.about);
         setUserAvatar(data.avatar);
-        // console.log(data);
-      }, [])
-
+      })
       .catch((err) => {
         console.log("Запрос данных пользователя при загрузе страницы " + err);
       });
-  });
+  },[]);
 
-  const getAllCards = api.getAllCards();
   React.useEffect(() => {
     getAllCards
       .then((data) => {
-        // console.log(data);
-        setCards(data.map((item) => ({
-          id: item._id,
-          name: item.name,
-          likes: item.likes.length,
-          link: item.link,
-        })));
-      }, [])
-
+          setCards(data);
+      })
       .catch((err) => {
         console.log("Запрос всех карточек при загрузке страницы " + err);
       });
-  });
+  },[]);
 
-  
   return (
     <main className="content section page__content">
       <section className="profile section">
@@ -83,8 +73,7 @@ function Main({ onEditProfile, onEditAvatar, onAddPlace, onCardClick }) {
       <section className="elements section" aria-label="фотогалерея">
         <ul className="elements__list">
           {
-            // cards.map(({id, ...props}) => <Card key={id} {...props} />) 
-            cards.map((card) => <Card key={card.id} card={card} onCardClick={onCardClick}/*name={item.name} link={item.link} likes={item.likes}*/  /*handleCardClick={onCardClick}*//>)
+            cards.map((card) => <Card key={card._id} card={card} onCardClick={onCardClick}/>)
           }      
         </ul>
       </section>

@@ -12,6 +12,7 @@
   background-size: 100% 100%;
   background-position: center;
   visibility: hidden;
+  ;
 }
 
 .elements__button_remove:hover {

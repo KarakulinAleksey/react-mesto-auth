@@ -13,8 +13,6 @@ function App() {
 
   const [selectedCard, setSelectedCard] = React.useState(null);
 
-  const [isPopupWithFormOpen, setPopupWithForm] = React.useState(false);
-
   function closeAllPopups(){
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
@@ -29,33 +27,36 @@ function App() {
     }
   }
 
-  function CloseClickConteiner(e){
+  function closeClickConteiner(e){
     const evtTarget = e.target;
-    console.log(evtTarget.closest(".popup__container"));
-      if (evtTarget.closest(".popup__container") == null) {
+    if (evtTarget.closest(".popup__container") == null) {
       closeAllPopups();
     }
   }
 
+  function openProfilePopup(){
+    setEditProfilePopupOpen(true);
+    document.addEventListener("keydown", handleEscClose);
+  }
+
+  function openAvatarPopup(){
+    setAvatarPopupOpen(true);
+    document.addEventListener("keydown", handleEscClose);
+  }
+
+  function openAddPlacePopup(){
+    setAddPlacePopupOpen(true);
+    document.addEventListener("keydown", handleEscClose);
+  }
+
+
   return (
     <>
       <Header />
-      <Main
-        onEditProfile={() => {
-          setEditProfilePopupOpen(true);
-          document.addEventListener("keydown", handleEscClose);
-        }}
-        onEditAvatar={() => {
-          setAvatarPopupOpen(true);
-          document.addEventListener("keydown", handleEscClose);
-        }}
-        onAddPlace={() => { 
-          setAddPlacePopupOpen(true);
-          document.addEventListener("keydown", handleEscClose);
-        }}
-      
-        onCardClick={setSelectedCard}
-          
+      <Main onEditProfile={openProfilePopup}
+            onEditAvatar={openAvatarPopup}
+            onAddPlace={openAddPlacePopup}
+            onCardClick={setSelectedCard}  
       />
       <Footer />
       <PopupWithForm
@@ -86,7 +87,7 @@ function App() {
         buttonText={"сохранить"}
         isOpen = {isEditProfilePopupOpen}
         onClose = {closeAllPopups}
-        onCloseClickConteiner = {CloseClickConteiner}       
+        onCloseClickConteiner = {closeClickConteiner}       
       />
 
       <PopupWithForm
@@ -117,7 +118,7 @@ function App() {
         buttonText={"создать"}
         isOpen = {isAddPlacePopupOpen}
         onClose = {closeAllPopups}
-        onCloseClickConteiner = {CloseClickConteiner}
+        onCloseClickConteiner = {closeClickConteiner}
         
       />
 
@@ -127,7 +128,7 @@ function App() {
         children={<></>}
         buttonText={"Да"}
         onClose = {closeAllPopups}
-        onCloseClickConteiner = {CloseClickConteiner}
+        onCloseClickConteiner = {closeClickConteiner}
       /> }
 
       <PopupWithForm
@@ -149,13 +150,13 @@ function App() {
         buttonText={"Сохранить"}
         isOpen = {isAvatarPopupOpen}
         onClose = {closeAllPopups}
-        onCloseClickConteiner = {CloseClickConteiner}
+        onCloseClickConteiner = {closeClickConteiner}
       />
 
       <ImagePopup
         card = {selectedCard}
         onClose = {closeAllPopups}
-        onCloseClickConteiner = {CloseClickConteiner}
+        onCloseClickConteiner = {closeClickConteiner}
       />
     
     </>
