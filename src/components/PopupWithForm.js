@@ -1,9 +1,7 @@
 
-function PopupWithForm({ name, title, children, buttonText, isOpen, onClose, onCloseClickConteiner}) {
+function PopupWithForm({ name, title, children, buttonText, isOpen, onClose, onCloseClickConteiner, onSubmit}) {
   return (
-    <div className={`popup popup_type_${name} ${isOpen ? "popup_show" : ""}`}  onClick={      
-      onCloseClickConteiner
-    }>
+    <div className={`popup popup_type_${name} ${isOpen ? "popup_show" : ""}`}  onClick={onCloseClickConteiner}>
       <div className={`popup__container popup__container_type_${name}`}>
         <button
           type="button"
@@ -13,6 +11,7 @@ function PopupWithForm({ name, title, children, buttonText, isOpen, onClose, onC
         ></button>
 
         <form
+          onSubmit={onSubmit}
           className={`popup__form popup__form_${name} section`}
           name={`form-${name}`}
         >

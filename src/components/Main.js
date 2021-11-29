@@ -1,40 +1,11 @@
-
-import { api } from "../utils/Api";
 import Card from "../components/Card";
 import pencel from "../images/Pencil.svg";
 import React from "react";
+import { TranslationContext } from "../contexts/CurrentUserContext";
 
-function Main({ onEditProfile, onEditAvatar, onAddPlace, onCardClick }) {
+function Main({ onEditProfile, onEditAvatar, onAddPlace, onCardClick, cards, onCardLike, onCardDelete  }) {
 
-  const [userName, setUserName] = React.useState("");
-  const [userDescription, setUserDescription] = React.useState("");
-  const [userAvatar, setUserAvatar] = React.useState("");
-  const [cards, setCards] = React.useState([]);
-
-  const getUserInfoData = api.getUserInfo();
-  const getAllCards = api.getAllCards();
-
-  React.useEffect(() => {
-    getUserInfoData
-      .then((data) => {
-        setUserName(data.name);
-        setUserDescription(data.about);
-        setUserAvatar(data.avatar);
-      })
-      .catch((err) => {
-        console.log("Запрос данных пользователя при загрузе страницы " + err);
-      });
-  },[]);
-
-  React.useEffect(() => {
-    getAllCards
-      .then((data) => {
-          setCards(data);
-      })
-      .catch((err) => {
-        console.log("Запрос всех карточек при загрузке страницы " + err);
-      });
-  },[]);
+  const translation = React.useContext(TranslationContext); 
 
   return (
     <main className="content section page__content">
@@ -42,7 +13,7 @@ function Main({ onEditProfile, onEditAvatar, onAddPlace, onCardClick }) {
         <div className="profile__figure">
           <div className="profile__avatar-section" onClick={onEditAvatar}>
             <img
-              style={{ backgroundImage: `url(${userAvatar})` }}
+              style={{ backgroundImage: `url(${translation.avatar})` }}
               alt=""
               className="profile__avatar"
             />
@@ -50,9 +21,11 @@ function Main({ onEditProfile, onEditAvatar, onAddPlace, onCardClick }) {
           </div>
           <div className="profile__info">
             <div className="profile__info-text">
-              <h1 className="profile__title section-title">{userName}</h1>
+              <h1 className="profile__title section-title">
+                {translation.name}
+              </h1>
               <p className="profile__text section-title section-title_size_medium">
-                {userDescription}
+                {translation.about}
               </p>
             </div>
             <button
@@ -72,9 +45,15 @@ function Main({ onEditProfile, onEditAvatar, onAddPlace, onCardClick }) {
       </section>
       <section className="elements section" aria-label="фотогалерея">
         <ul className="elements__list">
-          {
-            cards.map((card) => <Card key={card._id} card={card} onCardClick={onCardClick}/>)
-          }      
+          {cards.map((card) => (
+            <Card
+              key={card._id}
+              card={card}
+              onCardClick={onCardClick}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
+            />
+          ))}
         </ul>
       </section>
     </main>
