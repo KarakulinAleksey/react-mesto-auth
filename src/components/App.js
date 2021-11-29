@@ -11,31 +11,16 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup"; 
 
 function App() {
-  const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
-    React.useState(false);
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isAvatarPopupOpen, setAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
 
-  const [currentUser, setCurrentUser] = React.useState(""); 
+  const [currentUser, setCurrentUser] = React.useState({}); 
 
   const [cards, setCards] = React.useState([]);
 
   const getAllCards = api.getAllCards();
-
-  function handleCardLike(card) {
-    // const isLiked = card.likes.some((i) => i._id === translation._id);
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    api.likeCard(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    });
-  } 
-
-  function handleCardDelete(card) {
-    api.deleteCard(card._id).then((newCard) => {
-      setCards((state) => state.filter((c) => c._id !== card._id));
-    });
-  } 
 
   React.useEffect(() => {
     getAllCards
@@ -59,18 +44,84 @@ function App() {
       });
   }, []); 
 
+  React.useEffect(() => {
+    const closeByEscape = (e) => {
+      if (e.key === "Escape") {
+        closeAllPopups();
+      }
+    };
+
+    document.addEventListener("keydown", closeByEscape);
+
+    return () => document.removeEventListener("keydown", closeByEscape);
+  }, []);
+
+  function handleCardLike(card) {
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    api.likeCard(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+      })
+      .catch((err) => {
+        console.log("Запрос лайк карточек " + err);
+      });
+  } 
+
+  function handleCardDelete(card) {
+    api.deleteCard(card._id)
+      .then(() => {
+        setCards((state) => state.filter((c) => c._id !== card._id));
+      })
+      .catch((err) => {
+        console.log("Запрос удаление карточки " + err);
+      });
+  } 
+
+  function handleUpdateUser({ name, about }) {
+    const editUserInfo = api.editUserInfo(name, about);
+    editUserInfo
+      .then((data) => {
+        setCurrentUser(data);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log("Запрос обновления данных пользователя " + err);
+      });
+      
+  }
+
+  function handleAddPlaceSubmit({ cardName, cardLink }) {
+    console.log(cardName, cardLink )
+    const addCard = api.addCard(cardName, cardLink);
+    addCard
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log("Запрос добавления новой карточки " + err);
+      });
+    
+  }
+
+  function handleUpdateAvatar({ avatar }) {
+    const editAvatar = api.editAvatar(avatar);
+    editAvatar
+      .then((data) => {
+        setCurrentUser(data);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log("Запрос обновления аватара " + err);
+      });
+     
+  }
+
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
     setAvatarPopupOpen(false);
     setSelectedCard(false);
-    document.removeEventListener("keydown", handleEscClose);
-  }
-
-  function handleEscClose(evt) {
-    if (evt.key === "Escape") {
-      closeAllPopups();
-    }
   }
 
   function closeClickConteiner(e) {
@@ -82,52 +133,17 @@ function App() {
 
   function openProfilePopup() {
     setEditProfilePopupOpen(true);
-    document.addEventListener("keydown", handleEscClose);
   }
 
   function openAvatarPopup() {
     setAvatarPopupOpen(true);
-    document.addEventListener("keydown", handleEscClose);
   }
 
   function openAddPlacePopup() {
     setAddPlacePopupOpen(true);
-    document.addEventListener("keydown", handleEscClose);
   }
 
-  function handleUpdateUser({ name, about }) {
-    const editUserInfo = api.editUserInfo(name, about);
-    editUserInfo
-      .then((data) => {
-        setCurrentUser(data);
-      })
-      .finally(() => {
-        closeAllPopups();
-      });
-  }
 
-  function handleAddPlaceSubmit({ cardName, cardLink }) {
-    console.log(cardName, cardLink )
-    const addCard = api.addCard(cardName, cardLink);
-    addCard
-      .then((newCard) => {
-        setCards([newCard, ...cards]);
-      })
-      .finally(() => {
-        closeAllPopups();
-      });
-  }
-
-  function handleUpdateAvatar({ avatar }) {
-    const editAvatar = api.editAvatar(avatar);
-    editAvatar
-      .then((data) => {
-        setCurrentUser(data);
-      })
-      .finally(() => {
-        closeAllPopups();
-      });
-  }
 
   return (
     <>

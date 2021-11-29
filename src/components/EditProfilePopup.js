@@ -2,8 +2,6 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import { TranslationContext } from "../contexts/CurrentUserContext";
 
-
-
 export default function EditProfilePopup({isOpen, onClose, onCloseClickConteiner, onUpdateUser}) {
   const [name, setName] = React.useState("");
   const [discription, setDiscription] = React.useState("");
@@ -13,7 +11,7 @@ export default function EditProfilePopup({isOpen, onClose, onCloseClickConteiner
   React.useEffect(() => {
     setName(currentUser.name);
     setDiscription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
   function handleChangeName(item) {
     setName(item.target.value);
@@ -43,7 +41,7 @@ export default function EditProfilePopup({isOpen, onClose, onCloseClickConteiner
               type="text"
               className="popup__form-input section-title popup__form-input_type_name"
               onChange={handleChangeName}
-              value={name}
+              value={name || ""}
             />
             <span className="name-input-error"></span>
           </div>
@@ -55,7 +53,7 @@ export default function EditProfilePopup({isOpen, onClose, onCloseClickConteiner
               type="text"
               className="popup__form-input section-title popup__form-input_type_profession"
               onChange={handleChangediscription}
-              value={discription}
+              value={discription || ""}
             />
             <span className="profession-input-error"></span>
           </div>

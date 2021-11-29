@@ -1,17 +1,14 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-import { TranslationContext } from "../contexts/CurrentUserContext";
 
 export default function AddPlacePopup({isOpen, onClose, onCloseClickConteiner, onAppPlace}) {
   const [cardName, setCardName] = React.useState("");
   const [cardLink, setCardLink] = React.useState("");
 
-  const currentUser = React.useContext(TranslationContext);
-
   React.useEffect(() => {
-    setCardName(currentUser.name);
-    setCardLink(currentUser.about);
-  }, [currentUser]);
+    setCardName('');
+    setCardLink('');
+  }, [isOpen]);
 
   function handleChangeCardName(item) {
     setCardName(item.target.value);
