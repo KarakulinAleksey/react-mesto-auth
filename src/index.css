@@ -10,6 +10,9 @@
 
 @import url('./blocks/header/header.css');
 @import url('./blocks/header/__logo/header__logo.css');
+@import url('./blocks/header/__title/header__title.css');
+@import url('./blocks/header/__button/header__button.css');
+@import url('./blocks/header/__link/header__link.css');
 
 @import url('./blocks/logo/logo.css');
 @import url('./blocks/logo/__image/logo__image.css');
@@ -63,7 +66,16 @@
 @import url('./blocks/popup/__container-input/popup__container-input.css');
 @import url('./blocks/popup/__form-button-save/_type/popup__form-button-save_type_unable.css');
 @import url('./blocks/popup/__form-botton-confirm/popup__form-botton-confirm.css');
+@import url('./blocks/popup/__form/_type/popup__form_type_infoTooltip.css');
+@import url('./blocks/popup/__form-title/_type/popup__form-title_type_infoTooltip.css');
 
 @import url('./blocks/popup/__caption/popup__caption.css');
 @import url('./blocks/popup/__figure/popup__figure.css');
 @import url('./blocks/popup/__image/popup__image.css');
+
+@import url('./blocks/form-registration/form-registration.css');
+@import url('./blocks/form-registration/__title/form-registration__title.css');
+@import url('./blocks/form-registration/__input/form-registration__input.css');
+@import url('./blocks/form-registration/__button/form-registration__button.css');
+@import url('./blocks/form-registration/__title-bottom-button/form-registration__title-bottom-button.css'); 
+@import url('./blocks/form-registration/__link-bottom-button/form-registration__link-bottom-button.css'); 
