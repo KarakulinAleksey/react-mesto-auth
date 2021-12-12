@@ -12,13 +12,10 @@ export const register = (password, email) => {
       email: email,
     }),
   })
-    .then((response) => {
-      return response.json();
-    })
+    .then(_checkResponse)
     .then((res) => {
       return res;
-    })
-    .catch((err) => console.log("Ошибка при регистрации", err));
+    }) 
 };
 
 export const authorize = (password, email) => {
@@ -33,11 +30,10 @@ export const authorize = (password, email) => {
       email: email,
     }),
   })
-    .then((response) => response.json())
+    .then(_checkResponse)
     .then((data) => {
       return data;
     })
-    .catch((err) => console.log("Ошибка при получении токена", err));
 };
 
 export const checkToken = (token) => {
@@ -49,7 +45,14 @@ export const checkToken = (token) => {
       Authorization: `Bearer ${token}`,
     },
   })
-    .then((res) => res.json())
+    .then(_checkResponse)
     .then((data) => data)
-    .catch((err) => console.log("Ошибка проверки токена", err));
 };
+
+  //---------метод проверки запроса-------//
+ const _checkResponse = (res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }

@@ -1,12 +1,12 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-import { TranslationContext } from "../contexts/CurrentUserContext";
+import { СurrentUserContext } from "../contexts/CurrentUserContext";
 
 export default function EditProfilePopup({isOpen, onClose, onCloseClickConteiner, onUpdateUser}) {
   const [name, setName] = React.useState("");
   const [discription, setDiscription] = React.useState("");
 
-  const currentUser = React.useContext(TranslationContext);
+  const currentUser = React.useContext(СurrentUserContext);
 
   React.useEffect(() => {
     setName(currentUser.name);

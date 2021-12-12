@@ -5,7 +5,7 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import React from "react";
 import { api } from "../utils/Api";
-import { TranslationContext } from "../contexts/CurrentUserContext";
+import { СurrentUserContext } from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
@@ -14,7 +14,7 @@ import Login from "./Login";
 import Register from "./Register";
 import ProtectedRoute from "./ProtectedRoute";
 import InfoTooltip from "./InfoTooltip";
-import * as auth from "../auth.js";
+import * as auth from "../utils/auth.js";
 import infoTooltipImgSuccess from "../images/imgSuccess.jpg";
 import infoTooltipImgFail from "../images/imgFail.jpg";
 
@@ -198,7 +198,7 @@ function App() {
   return (
     <>
       <Switch>
-        <TranslationContext.Provider value={currentUser}>
+        <СurrentUserContext.Provider value={currentUser}>
           <ProtectedRoute
             path="/"
             loggedIn={loggedIn}
@@ -275,7 +275,7 @@ function App() {
             onClose={closeAllPopups}
             onCloseClickConteiner={closeClickConteiner}
           />
-        </TranslationContext.Provider>
+        </СurrentUserContext.Provider>
       </Switch>
     </>
   );

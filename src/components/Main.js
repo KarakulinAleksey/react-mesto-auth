@@ -1,11 +1,11 @@
 import Card from "../components/Card";
 import pencel from "../images/Pencil.svg";
 import React from "react";
-import { TranslationContext } from "../contexts/CurrentUserContext";
+import { СurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Main({ onEditProfile, onEditAvatar, onAddPlace, onCardClick, cards, onCardLike, onCardDelete  }) {
 
-  const translation = React.useContext(TranslationContext); 
+  const translation = React.useContext(СurrentUserContext); 
 
   return (
     <main className="content section page__content">

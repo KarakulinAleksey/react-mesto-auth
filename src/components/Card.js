@@ -1,9 +1,9 @@
 import React from "react"; //11
-import { TranslationContext } from "../contexts/CurrentUserContext"; //11
+import { СurrentUserContext } from "../contexts/CurrentUserContext"; //11
 
 function Card({ onCardClick, onCardLike, onCardDelete, card}){
 
-  const currentUser = React.useContext(TranslationContext); //11
+  const currentUser = React.useContext(СurrentUserContext); //11
   const isOwn = card.owner._id === currentUser._id;
 
   const isLiked = card.likes.some(i => i._id === currentUser._id);//11

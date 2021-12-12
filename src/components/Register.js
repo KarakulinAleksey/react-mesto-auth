@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, useHistory  } from "react-router-dom";
 import headerLogo from "../images/logo.svg";
-import * as auth from "../auth.js";
+import * as auth from "../utils/auth.js";
 
 
 function Register({openInfoTooltipPopup}) {
