@@ -2,7 +2,12 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import { СurrentUserContext } from "../contexts/CurrentUserContext";
 
-export default function EditProfilePopup({isOpen, onClose, onCloseClickConteiner, onUpdateUser}) {
+export default function EditProfilePopup({
+  isOpen,
+  onClose,
+  onCloseClickConteiner,
+  onUpdateUser,
+}) {
   const [name, setName] = React.useState("");
   const [discription, setDiscription] = React.useState("");
 
@@ -24,7 +29,7 @@ export default function EditProfilePopup({isOpen, onClose, onCloseClickConteiner
   function handleSubmit(e) {
     e.preventDefault();
 
-    onUpdateUser({name, about: discription});
+    onUpdateUser({ name, about: discription });
   }
 
   return (

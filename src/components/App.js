@@ -1,6 +1,5 @@
-import Header from "./Header";
+
 import Main from "./Main";
-import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import React from "react";
@@ -19,7 +18,8 @@ import infoTooltipImgSuccess from "../images/imgSuccess.jpg";
 import infoTooltipImgFail from "../images/imgFail.jpg";
 
 function App() {
-  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
+    React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isAvatarPopupOpen, setAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
@@ -31,10 +31,10 @@ function App() {
   const [userEmail, setUserEmail] = React.useState("");
   const [imgInfoTooltip, setImgInfoTooltip] = React.useState("");
 
-  const getAllCards = api.getAllCards();
   const history = useHistory();
 
   React.useEffect(() => {
+    const getAllCards = api.getAllCards();
     getAllCards
       .then((data) => {
         setCards(data);
@@ -44,9 +44,8 @@ function App() {
       });
   }, []);
 
-  const getUserInfoData = api.getUserInfo();
-
   React.useEffect(() => {
+    const getUserInfoData = api.getUserInfo();
     getUserInfoData
       .then((data) => {
         setCurrentUser(data);
@@ -73,16 +72,16 @@ function App() {
       const jwt = localStorage.getItem("jwt");
       auth
         .checkToken(jwt)
-          .then((res) => {
-            if (res) {
-              setLoggedIn(true);
-              history.push("/");
-              handelSetUserEmail(res.data.email);
-            }
-          })
-          .catch((err) => {
-            console.log("Проверка токена " + err);
-          });
+        .then((res) => {
+          if (res) {
+            setLoggedIn(true);
+            history.push("/");
+            handelSetUserEmail(res.data.email);
+          }
+        })
+        .catch((err) => {
+          console.log("Проверка токена " + err);
+        });
     }
   }, [loggedIn]);
 
@@ -157,10 +156,10 @@ function App() {
   }
 
   function closeAllPopups() {
-    setEditProfilePopupOpen(false);
+    setIsEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
     setAvatarPopupOpen(false);
-    setSelectedCard(false);
+    setSelectedCard(null);
     setInfoTooltipPopupOpen(false);
   }
 
@@ -172,7 +171,7 @@ function App() {
   }
 
   function openProfilePopup() {
-    setEditProfilePopupOpen(true);
+    setIsEditProfilePopupOpen(true);
   }
 
   function openAvatarPopup() {
@@ -196,17 +195,9 @@ function App() {
   }
 
   return (
-    <>
+    <СurrentUserContext.Provider value={currentUser}>
       <Switch>
-        <СurrentUserContext.Provider value={currentUser}>
-          <ProtectedRoute
-            path="/"
-            loggedIn={loggedIn}
-            handleSetLoggedIn={handleSetLoggedIn}
-            userEmail={userEmail}
-            component={Header}
-          />
-
+        <>
           <ProtectedRoute
             path="/"
             loggedIn={loggedIn}
@@ -218,9 +209,9 @@ function App() {
             cards={cards}
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
+            handleSetLoggedIn={handleSetLoggedIn}
+            userEmail={userEmail}
           />
-
-          <ProtectedRoute path="/" loggedIn={loggedIn} component={Footer} />
 
           <Route path="/sing-up">
             <Register openInfoTooltipPopup={openInfoTooltipPopup} />
@@ -229,55 +220,55 @@ function App() {
           <Route path="/sing-in">
             <Login handleSetLoggedIn={handleSetLoggedIn} />
           </Route>
-
-          <EditProfilePopup
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            onCloseClickConteiner={closeClickConteiner}
-            onUpdateUser={handleUpdateUser}
-          />
-
-          <AddPlacePopup
-            isOpen={isAddPlacePopupOpen}
-            onClose={closeAllPopups}
-            onCloseClickConteiner={closeClickConteiner}
-            onAppPlace={handleAddPlaceSubmit}
-          />
-
-          {
-            <PopupWithForm
-              name={"confirm"}
-              title={"Вы уверены?"}
-              children={<></>}
-              buttonText={"Да"}
-              onClose={closeAllPopups}
-              onCloseClickConteiner={closeClickConteiner}
-            />
-          }
-
-          <EditAvatarPopup
-            isOpen={isAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onCloseClickConteiner={closeClickConteiner}
-            onUpdateAvatar={handleUpdateAvatar}
-          />
-
-          <ImagePopup
-            card={selectedCard}
-            onClose={closeAllPopups}
-            onCloseClickConteiner={closeClickConteiner}
-          />
-
-          <InfoTooltip
-            imgInfoTooltip={imgInfoTooltip}
-            title={titleInfoTooltip}
-            isOpen={infoTooltipPopupOpen}
-            onClose={closeAllPopups}
-            onCloseClickConteiner={closeClickConteiner}
-          />
-        </СurrentUserContext.Provider>
+        </>
       </Switch>
-    </>
+
+      <EditProfilePopup
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
+        onCloseClickConteiner={closeClickConteiner}
+        onUpdateUser={handleUpdateUser}
+      />
+
+      <AddPlacePopup
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
+        onCloseClickConteiner={closeClickConteiner}
+        onAppPlace={handleAddPlaceSubmit}
+      />
+
+      {
+        <PopupWithForm
+          name={"confirm"}
+          title={"Вы уверены?"}
+          children={<></>}
+          buttonText={"Да"}
+          onClose={closeAllPopups}
+          onCloseClickConteiner={closeClickConteiner}
+        />
+      }
+
+      <EditAvatarPopup
+        isOpen={isAvatarPopupOpen}
+        onClose={closeAllPopups}
+        onCloseClickConteiner={closeClickConteiner}
+        onUpdateAvatar={handleUpdateAvatar}
+      />
+
+      <ImagePopup
+        card={selectedCard}
+        onClose={closeAllPopups}
+        onCloseClickConteiner={closeClickConteiner}
+      />
+
+      <InfoTooltip
+        imgInfoTooltip={imgInfoTooltip}
+        title={titleInfoTooltip}
+        isOpen={infoTooltipPopupOpen}
+        onClose={closeAllPopups}
+        onCloseClickConteiner={closeClickConteiner}
+      />
+    </СurrentUserContext.Provider>
   );
 }
 

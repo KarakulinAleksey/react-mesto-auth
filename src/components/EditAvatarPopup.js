@@ -1,12 +1,11 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-// import { TranslationContext } from "../contexts/CurrentUserContext";
 
 export default function EditAvatarPopup({
   isOpen,
   onClose,
   onCloseClickConteiner,
-  onUpdateAvatar
+  onUpdateAvatar,
 }) {
   const urlRef = React.useRef();
 

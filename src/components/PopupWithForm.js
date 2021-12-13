@@ -1,12 +1,23 @@
-
-function PopupWithForm({ name , title, children, buttonText, isOpen, onClose, onCloseClickConteiner, onSubmit}) {
+function PopupWithForm({
+  name,
+  title,
+  children,
+  buttonText,
+  isOpen,
+  onClose,
+  onCloseClickConteiner,
+  onSubmit,
+}) {
   return (
-    <div className={`popup popup_type_${name} ${isOpen ? "popup_show" : ""}`}  onClick={onCloseClickConteiner}>
+    <div
+      className={`popup popup_type_${name} ${isOpen ? "popup_show" : ""}`}
+      onClick={onCloseClickConteiner}
+    >
       <div className={`popup__container popup__container_type_${name}`}>
         <button
           type="button"
           className="popup__form-button-exit"
-          aria-label="кнопка закрытия формы подтверждения удаления карточки"
+          aria-label="кнопка закрытия"
           onClick={onClose}
         ></button>
 
@@ -27,4 +38,3 @@ function PopupWithForm({ name , title, children, buttonText, isOpen, onClose, on
 }
 
 export default PopupWithForm;
-

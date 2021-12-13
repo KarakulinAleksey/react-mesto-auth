@@ -1,7 +1,8 @@
 import React from "react";
-import { NavLink, useHistory } from "react-router-dom";
-import headerLogo from "../images/logo.svg";
+import { useHistory } from "react-router-dom";
+
 import * as auth from "../utils/auth.js";
+import Header from "./Header";
 
 function Login({ handleSetLoggedIn }) {
   const [email, setEmail] = React.useState("");
@@ -38,18 +39,7 @@ function Login({ handleSetLoggedIn }) {
 
   return (
     <>
-      <header className="header section page__header">
-        <a className="logo header__logo" href="#">
-          <img
-            className="logo__image"
-            src={headerLogo}
-            alt="Логотип сервиса Место"
-          />
-        </a>
-        <NavLink className="header__link" to="/sing-up">
-          Регистрация
-        </NavLink>
-      </header>
+      <Header />
 
       <form
         className="form-registration section"

@@ -1,28 +1,24 @@
 import React from "react";
-import { NavLink, useHistory  } from "react-router-dom";
-import headerLogo from "../images/logo.svg";
+import { NavLink, useHistory } from "react-router-dom";
 import * as auth from "../utils/auth.js";
+import Header from "./Header";
 
-
-function Register({openInfoTooltipPopup}) {
+function Register({ openInfoTooltipPopup }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const history = useHistory();
 
   function handleSubmit(e) {
     e.preventDefault();
-    auth.register(password, email)
+    auth
+      .register(password, email)
       .then((res) => {
-        console.log(res);
-        if (res.data){
-        openInfoTooltipPopup(true);
-        history.push("/sing-in");
-        }
-        else
-        {
+        if (res.data) {
+          openInfoTooltipPopup(true);
+          history.push("/sing-in");
+        } else {
           openInfoTooltipPopup(false);
         }
-        
       })
       .catch((err) => {
         console.log("Ошибка регистрации ", err);
@@ -40,20 +36,13 @@ function Register({openInfoTooltipPopup}) {
 
   return (
     <>
-      <header className="header section page__header">
-        <a className="logo header__logo" href="#">
-          <img
-            className="logo__image"
-            src={headerLogo}
-            alt="Логотип сервиса Место"
-          />
-        </a>
-        <NavLink className="header__link" to="/sing-in">
-          Войти
-        </NavLink>
-      </header>
+      <Header />
 
-      <form className="form-registration section" name="form-login" onSubmit={handleSubmit} >
+      <form
+        className="form-registration section"
+        name="form-login"
+        onSubmit={handleSubmit}
+      >
         <h2 className="form-registration__title section-title">Регистрация</h2>
         <input
           name="email"
@@ -63,7 +52,6 @@ function Register({openInfoTooltipPopup}) {
           value={email}
           onChange={handleChangeEmail}
           required
-          
         />
         <input
           name="password"
@@ -74,7 +62,7 @@ function Register({openInfoTooltipPopup}) {
           onChange={handlePassword}
           required
         />
-        <button type="submit" className="form-registration__button" onSubmit={handleSubmit}>
+        <button type="submit" className="form-registration__button">
           Зарегистрироваться
         </button>
         <p className="form-registration__title-bottom-button">
