@@ -199,7 +199,8 @@ function App() {
       <Switch>
         {/* <> */}
           <ProtectedRoute
-            path exact="/"
+            path="/" 
+            exact
             loggedIn={loggedIn}
             component={Main}
             onEditProfile={openProfilePopup}
