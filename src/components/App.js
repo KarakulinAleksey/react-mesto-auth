@@ -197,7 +197,6 @@ function App() {
   return (
     <СurrentUserContext.Provider value={currentUser}>
       <Switch>
-        {/* <> */}
           <ProtectedRoute
             path="/" 
             exact
@@ -221,7 +220,6 @@ function App() {
           <Route path="/sing-in">
             <Login handleSetLoggedIn={handleSetLoggedIn} />
           </Route>
-        {/* </> */}
       </Switch>
 
       <EditProfilePopup
