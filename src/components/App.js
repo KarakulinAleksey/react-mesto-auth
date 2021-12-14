@@ -197,9 +197,9 @@ function App() {
   return (
     <СurrentUserContext.Provider value={currentUser}>
       <Switch>
-        <>
+        {/* <> */}
           <ProtectedRoute
-            path="/"
+            path exact="/"
             loggedIn={loggedIn}
             component={Main}
             onEditProfile={openProfilePopup}
@@ -220,7 +220,7 @@ function App() {
           <Route path="/sing-in">
             <Login handleSetLoggedIn={handleSetLoggedIn} />
           </Route>
-        </>
+        {/* </> */}
       </Switch>
 
       <EditProfilePopup
