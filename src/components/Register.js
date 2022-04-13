@@ -13,7 +13,8 @@ function Register({ openInfoTooltipPopup }) {
     auth
       .register(password, email)
       .then((res) => {
-        if (res.data) {
+       // if (res.data) {
+        if (!(typeof res === "undefined")) { // 15
           openInfoTooltipPopup(true);
           history.push("/sing-in");
         } else {

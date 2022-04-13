@@ -15,6 +15,7 @@ class Api {
   getAllCards() {
     return fetch(`${this._baseUrl}/cards/`, {
       method: 'GET',
+      credentials: 'include',
       headers: this._headers
     })
       .then(this._checkResponse)
@@ -23,6 +24,7 @@ class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
+      credentials: 'include',
       headers: this._headers
     })
       .then(this._checkResponse)
@@ -33,6 +35,7 @@ class Api {
     this._userAbout = userAbout;
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: this._userName,
@@ -47,6 +50,7 @@ class Api {
     this._cardLink = cardLink;
     return fetch(`${this._baseUrl}/cards/`, {
       method: 'POST',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         "name": this._cardName,
@@ -60,6 +64,7 @@ class Api {
     this._idCard = idCard;
     return fetch(`${this._baseUrl}/cards/${idCard}`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: this._headers
     })
       .then(this._checkResponse)
@@ -69,6 +74,7 @@ class Api {
     this._avatar = avatar;
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         avatar: this._avatar,
@@ -81,16 +87,18 @@ class Api {
   likeCard(idCard, isLike) {
     if (isLike) {
       this._idCard = idCard;
-      return fetch(`${this._baseUrl}/cards/likes/${idCard}`, {
+      return fetch(`${this._baseUrl}/cards/${idCard}/likes`, {
         method: 'PUT',
+        credentials: 'include',
         headers: this._headers
       })
         .then(this._checkResponse)
     }
     else {
       this._idCard = idCard;
-      return fetch(`${this._baseUrl}/cards/likes/${idCard}`, {
+      return fetch(`${this._baseUrl}/cards/${idCard}/likes`, {
         method: 'DELETE',
+        credentials: 'include',
         headers: this._headers
       })
         .then(this._checkResponse)
@@ -100,9 +108,11 @@ class Api {
 }
 
 export const api = new Api({
-    baseUrl: "https://mesto.nomoreparties.co/v1/cohort-29",
+    // baseUrl: "https://mesto.nomoreparties.co/v1/cohort-29",
+    baseUrl: "http://localhost:3000",
+    // baseUrl: "https://api.mesto.karakulin.nomoredomains.xyz",
     headers: {
-      authorization: "76bc0008-f467-484c-9d7d-ba27b504e337",
+      authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBjOTgyYTRmY2JmNTc1MTI2MGZhMjIiLCJpYXQiOjE2NDQ5OTI5NTMsImV4cCI6MTY0NTU5Nzc1M30.gxQVPmzBiKWuhbYzLwt65-dAn-_vShi7fdSWrYmR_SU",
       "Content-Type": "application/json",
     }, 
   });

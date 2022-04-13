@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# Проект: Место (React)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Описание проекта:
+Проект Mesto - интерактивный одностраничный сайт, где любой пользователь может поделиться своими фото и информацией о себе. Фотографии можно добавлять, удалять и ставить/убирать лайки.
 
-## Available Scripts
+### Функциональность:
+- Верстка сайта адаптивна - подстраивается под разрешение экрана устройства.
+- Фотографии и профиль пользователя подгружаются с сервера.
+- Реализована авторизация пользователя.
+- Все поля форм валидируются.
+- Кнопки, расположенные на сайте, подсвечиваются при наведении на них.
+- Все поп-апы плавно открываются и закрываются.
+- Закрывать поп-апы можно несколькими способами: кликнув на крестик, кликнув на оверлей, нажав кнопку Esc.
+  Формы сайта позволяют:
+- Ввести и изменять информацию о владельце фотографий.
+- Изменять аватар пользователя, добавив ссылку на картинку в соответсвующее поле формы.
+- Добавлять фотографии, вводя ссылку и подпись к ней в соответствующем диалоговом окне.
+- Ставить лайки и удалять свои фотографии. Реализован счетчик лайков. При удалении фотографий появляется предупреждающий поп-ап.
+- Увеличивать фотографии кликнув по изображению.
 
-In the project directory, you can run:
 
-### `npm start`
+### Какие технологии используются?
+- Сайт реализован на React с использованием HTML5, CSS3, JavaScript и JSX.
+- Для стилей используется методология БЭМ.
+- Верстка реализована с использованием flexbox и grid.
+- В проекте применяется декларативный подход, реализованы функциональные компоненты, используются хуки useState, useEffect, useHistory и useLocation.
+- Для регистрации, авторизации пользователя разработаны отдельные страницы, реализована переадресация с помощью библиотеки React Router.
+- Проверка наличия токена в Cookie (автоматический вход в аккаунт, даже если пользователь ушел с сайта).
+- Верстка велась согласно макета в Figma.com
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Инструкция по развёртыванию:
+- Клонируйте репозиторий к себе на компьютер с помощью команды:    
+`git clone https://github.com/KarakulinAleksey/react-mesto-auth.git`   
+- В этом проекте используется библиотека NPM. 
+- Откройте репозиторий проекта и выполните команду:    
+`npm i`    
+- Чтобы запустить проект, в репозитории проекта выполните команду:    
+`npm run start`    
+- Проект откроется на локальном сервере по адресу: http://localhost:3000

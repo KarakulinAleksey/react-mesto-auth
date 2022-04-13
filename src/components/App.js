@@ -68,21 +68,29 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    if (localStorage.getItem("jwt")) {
-      const jwt = localStorage.getItem("jwt");
+     const getAllCards = api.getAllCards();
+     getAllCards
+       .then((data) => {
+         setCards(data);
+       })
+       .catch((err) => {
+         console.log("Запрос всех карточек при загрузке страницы " + err);
+       });
+
       auth
-        .checkToken(jwt)
+        .checkToken()
         .then((res) => {
           if (res) {
             setLoggedIn(true);
             history.push("/");
-            handelSetUserEmail(res.data.email);
+            setCurrentUser(res); // 15
+            handelSetUserEmail(res.email);
           }
         })
         .catch((err) => {
           console.log("Проверка токена " + err);
         });
-    }
+        
   }, [loggedIn]);
 
   function handelSetUserEmail(email) {
@@ -94,7 +102,8 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+   //  const isLiked = card.likes.some((i) => i._id === currentUser._id);
+   const isLiked = card.likes.some((i) => i === currentUser._id);
     api
       .likeCard(card._id, !isLiked)
       .then((newCard) => {
@@ -131,7 +140,7 @@ function App() {
   }
 
   function handleAddPlaceSubmit({ cardName, cardLink }) {
-    console.log(cardName, cardLink);
+    // console.log(cardName, cardLink);
     const addCard = api.addCard(cardName, cardLink);
     addCard
       .then((newCard) => {

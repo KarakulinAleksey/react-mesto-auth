@@ -1,15 +1,27 @@
 import React from "react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import headerLogo from "../images/logo.svg";
+import * as auth from "../utils/auth";
 
 function Header({ handleSetLoggedIn, userEmail }) {
   const history = useHistory();
   const location = useLocation();
 
   function onSingOut() {
-    localStorage.removeItem("jwt");
+    auth.logout()     // 15
+    .then((res) => {
+        if (res) {
+           /* handleLogStatus(false);
+            setHeaderEmail('');
+            props.history.push('signin');
+            setCurrentUser({name: '', link: '', avatar: ''});*/
+            history.push("/sing-in");
+            handleSetLoggedIn(false);
+        }
+        })
+   /* localStorage.removeItem("jwt");
     history.push("/sing-in");
-    handleSetLoggedIn(false);
+    handleSetLoggedIn(false);*/
   }
 
   function navLink() {

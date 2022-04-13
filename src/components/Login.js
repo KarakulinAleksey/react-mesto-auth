@@ -18,11 +18,12 @@ function Login({ handleSetLoggedIn }) {
     auth
       .authorize(password, email)
       .then((res) => {
-        if (res.token) {
+       // if (res.token) {
+         if (res.message === 'Логин прошел успешно'){
           setEmail("");
           setPassword("");
           handleSetLoggedIn(true);
-          onLogin(res);
+          // onLogin(res);
           history.push("/");
         }
       })
